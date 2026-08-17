@@ -179,9 +179,9 @@ location ^~ /projects/LanderPi/ {
     proxy_ssl_server_name on;
 }
 
-# 项目2：SOARM101
-location ^~ /projects/SOARM101/ {
-    proxy_pass https://hiwonder-docs.github.io/SOARM101/projects/SOARM101/;
+# 项目2：LeRobot
+location ^~ /projects/LeRobot/ {
+    proxy_pass https://hiwonder-docs.github.io/LeRobot-vite/projects/LeRobot/;
     proxy_set_header Host hiwonder-docs.github.io;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
