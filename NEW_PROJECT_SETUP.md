@@ -1,222 +1,185 @@
-# 新项目文档部署流程
-
-> 适用于在 `wiki-test.hiwonder.com` 域名下新增 VitePress 文档项目的场景。
-> 每个项目独立 GitHub 仓库，通过宝塔 Nginx 反向代理统一对外提供服务。
-
+﻿# 鏂伴」鐩枃妗ｉ儴缃叉祦绋?
+> 閫傜敤浜庡湪 `wiki-test.hiwonder.com` 鍩熷悕涓嬫柊澧?VitePress 鏂囨。椤圭洰鐨勫満鏅€?> 姣忎釜椤圭洰鐙珛 GitHub 浠撳簱锛岄€氳繃瀹濆 Nginx 鍙嶅悜浠ｇ悊缁熶竴瀵瑰鎻愪緵鏈嶅姟銆?
 ---
 
-## 占位符说明
+## 鍗犱綅绗﹁鏄?
+鏈枃妗ｄ腑浣跨敤浠ヤ笅鍗犱綅绗︼紝浣跨敤鏃惰鍏ㄩ儴鏇挎崲涓哄疄闄呭€硷細
 
-本文档中使用以下占位符，使用时请全部替换为实际值：
-
-| 占位符 | 含义 | 示例值 |
+| 鍗犱綅绗?| 鍚箟 | 绀轰緥鍊?|
 |--------|------|--------|
-| `<项目名>` | URL 路由中的项目标识（路由 `/projects/<项目名>/` 中的值） | `LanderPi`、`LeRobot` |
-| `<仓库名>` | GitHub 仓库的名称（可能与项目名不同） | `LanderPi-vite`、`LeRobot-vite` |
+| `<椤圭洰鍚?` | URL 璺敱涓殑椤圭洰鏍囪瘑锛堣矾鐢?`/projects/<椤圭洰鍚?/` 涓殑鍊硷級 | `LanderPi`銆乣LeRobot` |
+| `<浠撳簱鍚?` | GitHub 浠撳簱鐨勫悕绉帮紙鍙兘涓庨」鐩悕涓嶅悓锛?| `LanderPi-vite`銆乣LeRobot-vite` |
 
-> ⚠️ `<项目名>` 和 `<仓库名>` 可以相同也可以不同，但同一个项目中所有地方必须保持一致。
-
+> 鈿狅笍 `<椤圭洰鍚?` 鍜?`<浠撳簱鍚?` 鍙互鐩稿悓涔熷彲浠ヤ笉鍚岋紝浣嗗悓涓€涓」鐩腑鎵€鏈夊湴鏂瑰繀椤讳繚鎸佷竴鑷淬€?
 ---
 
-## 完整流程
+## 瀹屾暣娴佺▼
 
-### 第一步：GitHub 创建仓库
+### 绗竴姝ワ細GitHub 鍒涘缓浠撳簱
 
-1. 在 GitHub 上创建一个新仓库（建议设为 Public）
-2. 仓库名记为 `<仓库名>`（例如 `LanderPi-vite`）
-3. 不要勾选 "Initialize this repository"（保持空仓库）
-4. 本地克隆空仓库到任意目录
+1. 鍦?GitHub 涓婂垱寤轰竴涓柊浠撳簱锛堝缓璁涓?Public锛?2. 浠撳簱鍚嶈涓?`<浠撳簱鍚?`锛堜緥濡?`LanderPi-vite`锛?3. 涓嶈鍕鹃€?"Initialize this repository"锛堜繚鎸佺┖浠撳簱锛?4. 鏈湴鍏嬮殕绌轰粨搴撳埌浠绘剰鐩綍
 
 ```bash
-git clone https://github.com/<你的用户名>/<仓库名>.git
+git clone https://github.com/<浣犵殑鐢ㄦ埛鍚?/<浠撳簱鍚?.git
 ```
 
 ---
 
-### 第二步：复制模板项目
+### 绗簩姝ワ細澶嶅埗妯℃澘椤圭洰
 
-1. 将现有的 LanderPi-vite 项目**完整复制**到新克隆的空仓库目录中
-2. 进入新仓库目录
-
+1. 灏嗙幇鏈夌殑 LanderPi-vite 椤圭洰**瀹屾暣澶嶅埗**鍒版柊鍏嬮殕鐨勭┖浠撳簱鐩綍涓?2. 杩涘叆鏂颁粨搴撶洰褰?
 ---
 
-### 第三步：替换文档内容
+### 绗笁姝ワ細鏇挎崲鏂囨。鍐呭
 
-1. **替换 Markdown 文档**：
-   - 删除 `docs/docs/` 下的所有 `.md` 文件
-   - 把新项目的 Markdown 文件放到 `docs/docs/` 目录下
-
-2. **替换静态资源**：
-   - 删除 `docs/_static/` 下的所有内容
-   - 把新项目的图片等资源放到 `docs/_static/` 目录下
-
-> 📌 文件目录结构保持 `docs/docs/*.md` 和 `docs/_static/**/*` 不变，只换内容。
-
+1. **鏇挎崲 Markdown 鏂囨。**锛?   - 鍒犻櫎 `docs/docs/` 涓嬬殑鎵€鏈?`.md` 鏂囦欢
+   - 鎶婃柊椤圭洰鐨?Markdown 鏂囦欢鏀惧埌 `docs/docs/` 鐩綍涓?
+2. **鏇挎崲闈欐€佽祫婧?*锛?   - 鍒犻櫎 `docs/_static/` 涓嬬殑鎵€鏈夊唴瀹?   - 鎶婃柊椤圭洰鐨勫浘鐗囩瓑璧勬簮鏀惧埌 `docs/_static/` 鐩綍涓?
+> 馃搶 鏂囦欢鐩綍缁撴瀯淇濇寔 `docs/docs/*.md` 鍜?`docs/_static/**/*` 涓嶅彉锛屽彧鎹㈠唴瀹广€?
 ---
 
-### 第四步：修改配置文件（关键）
+### 绗洓姝ワ細淇敼閰嶇疆鏂囦欢锛堝叧閿級
 
-需要修改以下 6 个文件中的 `<项目名>` 和 `<仓库名>`：
-
-#### 4.1 `docs/.vitepress/config.mts`（第 15 行）
+闇€瑕佷慨鏀逛互涓?6 涓枃浠朵腑鐨?`<椤圭洰鍚?` 鍜?`<浠撳簱鍚?`锛?
+#### 4.1 `docs/.vitepress/config.mts`锛堢 15 琛岋級
 
 ```typescript
-// 修改前
-const docsBase = normalizeBase(process.env.DOCS_BASE || '/projects/LanderPi/en/latest/')
+// 淇敼鍓?const docsBase = normalizeBase(process.env.DOCS_BASE || '/projects/LanderPi/en/latest/')
 
-// 修改后
-const docsBase = normalizeBase(process.env.DOCS_BASE || '/projects/<项目名>/en/latest/')
+// 淇敼鍚?const docsBase = normalizeBase(process.env.DOCS_BASE || '/projects/<椤圭洰鍚?/en/latest/')
 ```
 
-同时检查第 641-642 行的 `title` 和 `description`：
-
+鍚屾椂妫€鏌ョ 641-642 琛岀殑 `title` 鍜?`description`锛?
 ```typescript
-title: '<项目名> Documentation',
-description: '<项目名> robot documentation',
+title: '<椤圭洰鍚? Documentation',
+description: '<椤圭洰鍚? robot documentation',
 ```
 
-#### 4.2 `scripts/stage_main_site.mjs`（第 10 行）
+#### 4.2 `scripts/stage_main_site.mjs`锛堢 10 琛岋級
 
 ```javascript
-// 修改前
-const targetDir = join(repositoryRoot, 'projects/LanderPi/en/latest')
+// 淇敼鍓?const targetDir = join(repositoryRoot, 'projects/LanderPi/en/latest')
 
-// 修改后
-const targetDir = join(repositoryRoot, 'projects/<项目名>/en/latest')
+// 淇敼鍚?const targetDir = join(repositoryRoot, 'projects/<椤圭洰鍚?/en/latest')
 ```
 
-#### 4.3 根目录 `index.html`
+#### 4.3 鏍圭洰褰?`index.html`
 
 ```html
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0;url=/projects/<项目名>/en/latest/docs/<入口文档名>.html">
-  <title><项目名> Documentation</title>
+  <meta http-equiv="refresh" content="0;url=/projects/<椤圭洰鍚?/en/latest/docs/<鍏ュ彛鏂囨。鍚?.html">
+  <title><椤圭洰鍚? Documentation</title>
 </head>
 <body>
-  <a href="/projects/<项目名>/en/latest/docs/<入口文档名>.html">Click here if you are not redirected automatically.</a>
+  <a href="/projects/<椤圭洰鍚?/en/latest/docs/<鍏ュ彛鏂囨。鍚?.html">Click here if you are not redirected automatically.</a>
 </body>
 </html>
 ```
 
-> ⚠️ `<入口文档名>` 是 `docs/docs/` 下的第一个文档名（不含 `.md` 后缀），例如 `1_LanderPi_User_Manual`。
-
-#### 4.4 `docs/index.md`（第 3 行）
-
-```markdown
----
-layout: page-redirect
-redirectTo: /docs/<入口文档名>.html
----
-```
-
-> 这里是相对于 `base` 的路径，不用加 `/projects/<项目名>/en/latest/` 前缀。
-
-#### 4.5 `docs/docs/index.md`（第 3 行）
-
-同上：
+> 鈿狅笍 `<鍏ュ彛鏂囨。鍚?` 鏄?`docs/docs/` 涓嬬殑绗竴涓枃妗ｅ悕锛堜笉鍚?`.md` 鍚庣紑锛夛紝渚嬪 `1_LanderPi_User_Manual`銆?
+#### 4.4 `docs/index.md`锛堢 3 琛岋級
 
 ```markdown
 ---
 layout: page-redirect
-redirectTo: /docs/<入口文档名>.html
+redirectTo: /docs/<鍏ュ彛鏂囨。鍚?.html
 ---
 ```
 
-#### 4.6 `README.md`（可选）
+> 杩欓噷鏄浉瀵逛簬 `base` 鐨勮矾寰勶紝涓嶇敤鍔?`/projects/<椤圭洰鍚?/en/latest/` 鍓嶇紑銆?
+#### 4.5 `docs/docs/index.md`锛堢 3 琛岋級
 
-更新项目描述：
-
+鍚屼笂锛?
 ```markdown
-# <项目名> Documentation
+---
+layout: page-redirect
+redirectTo: /docs/<鍏ュ彛鏂囨。鍚?.html
+---
+```
 
-This repository contains the <项目名> VitePress documentation site.
+#### 4.6 `README.md`锛堝彲閫夛級
+
+鏇存柊椤圭洰鎻忚堪锛?
+```markdown
+# <椤圭洰鍚? Documentation
+
+This repository contains the <椤圭洰鍚? VitePress documentation site.
 ```
 
 ---
 
-### 第五步：本地构建验证
+### 绗簲姝ワ細鏈湴鏋勫缓楠岃瘉
 
-在仓库根目录执行：
-
+鍦ㄤ粨搴撴牴鐩綍鎵ц锛?
 ```bash
-# 1. 安装依赖（首次需要）
+# 1. 瀹夎渚濊禆锛堥娆￠渶瑕侊級
 npm ci
 
-# 2. 构建文档
+# 2. 鏋勫缓鏂囨。
 npm run docs:build
 
-# 3. 整理构建产物
+# 3. 鏁寸悊鏋勫缓浜х墿
 npm run docs:stage-main
 ```
 
-构建完成后，检查 `projects/<项目名>/en/latest/` 目录：
+鏋勫缓瀹屾垚鍚庯紝妫€鏌?`projects/<椤圭洰鍚?/en/latest/` 鐩綍锛?
+- 搴旇鏈?`docs/*.html`锛堟瘡涓?md 瀵瑰簲涓€涓?html锛?- 搴旇鏈?`assets/`锛堝寘鍚?CSS銆丣S銆佸浘鐗囷級
+- 搴旇鏈?`index.html`
 
-- 应该有 `docs/*.html`（每个 md 对应一个 html）
-- 应该有 `assets/`（包含 CSS、JS、图片）
-- 应该有 `index.html`
-
-**关键检查**：打开 `projects/<项目名>/en/latest/index.html`，确认其中的 CSS 路径为：
+**鍏抽敭妫€鏌?*锛氭墦寮€ `projects/<椤圭洰鍚?/en/latest/index.html`锛岀‘璁ゅ叾涓殑 CSS 璺緞涓猴細
 ```
-/projects/<项目名>/en/latest/assets/xxx.css
+/projects/<椤圭洰鍚?/en/latest/assets/xxx.css
 ```
 
-如果路径不对，说明 `config.mts` 的 `base` 配置有误。
-
+濡傛灉璺緞涓嶅锛岃鏄?`config.mts` 鐨?`base` 閰嶇疆鏈夎銆?
 ---
 
-### 第六步：提交并推送到 GitHub
+### 绗叚姝ワ細鎻愪氦骞舵帹閫佸埌 GitHub
 
 ```bash
-# 1. 添加文件（注意不要提交 node_modules、docs/.vitepress/dist 等）
+# 1. 娣诲姞鏂囦欢锛堟敞鎰忎笉瑕佹彁浜?node_modules銆乨ocs/.vitepress/dist 绛夛級
 git add projects/ index.html .nojekyll .gitignore package.json package-lock.json scripts/ docs/ .vitepress/
 
-# 2. 简化提交（推荐）
-git add -A
-# 但要确保 .gitignore 正确
+# 2. 绠€鍖栨彁浜わ紙鎺ㄨ崘锛?git add -A
+# 浣嗚纭繚 .gitignore 姝ｇ‘
 
-# 3. 提交
-git commit -m "init: <项目名> 文档初始化"
+# 3. 鎻愪氦
+git commit -m "init: <椤圭洰鍚? 鏂囨。鍒濆鍖?
 
-# 4. 推送
-git push origin main
+# 4. 鎺ㄩ€?git push origin main
 ```
 
-> 📌 `.gitignore` 应包含 `node_modules/`，但 `docs/`、`scripts/` 等源码可以保留（取决于你希望仓库包含什么）。
-> **必须提交**：`projects/`、`index.html`、`.nojekyll`（GitHub Pages 直接服务这些静态文件）。
-
+> 馃搶 `.gitignore` 搴斿寘鍚?`node_modules/`锛屼絾 `docs/`銆乣scripts/` 绛夋簮鐮佸彲浠ヤ繚鐣欙紙鍙栧喅浜庝綘甯屾湜浠撳簱鍖呭惈浠€涔堬級銆?> **蹇呴』鎻愪氦**锛歚projects/`銆乣index.html`銆乣.nojekyll`锛圙itHub Pages 鐩存帴鏈嶅姟杩欎簺闈欐€佹枃浠讹級銆?
 ---
 
-### 第七步：配置 GitHub Pages
+### 绗竷姝ワ細閰嶇疆 GitHub Pages
 
-1. 打开 GitHub 仓库 → **Settings** → **Pages**
+1. 鎵撳紑 GitHub 浠撳簱 鈫?**Settings** 鈫?**Pages**
 2. **Source**: `Deploy from a branch`
 3. **Branch**: `main` / `root`
-4. **不要绑定自定义域名**（Custom domain 留空）
-
-等待几分钟，验证 GitHub Pages 直连是否可访问：
+4. **涓嶈缁戝畾鑷畾涔夊煙鍚?*锛圕ustom domain 鐣欑┖锛?
+绛夊緟鍑犲垎閽燂紝楠岃瘉 GitHub Pages 鐩磋繛鏄惁鍙闂細
 ```
-https://<你的GitHub用户名>.github.io/<仓库名>/projects/<项目名>/en/latest/
+https://<浣犵殑GitHub鐢ㄦ埛鍚?.github.io/<浠撳簱鍚?/projects/<椤圭洰鍚?/en/latest/
 ```
 
-> 例如：`https://hiwonder-docs.github.io/LanderPi-vite/projects/LanderPi/en/latest/`
+> 渚嬪锛歚https://hiwonder-docs.github.io/LanderPi-vite/projects/LanderPi/en/latest/`
 
-如果 CSS 样式正常，说明 GitHub Pages 配置成功。
-
+濡傛灉 CSS 鏍峰紡姝ｅ父锛岃鏄?GitHub Pages 閰嶇疆鎴愬姛銆?
 ---
 
-### 第八步：配置宝塔 Nginx 反向代理
+### 绗叓姝ワ細閰嶇疆瀹濆 Nginx 鍙嶅悜浠ｇ悊
 
-1. 登录宝塔面板
-2. 找到 `wiki-test.hiwonder.com` 站点 → **设置** → **配置文件**
-3. 在 `server {}` 块内追加一条 location 规则：
-
+1. 鐧诲綍瀹濆闈㈡澘
+2. 鎵惧埌 `wiki-test.hiwonder.com` 绔欑偣 鈫?**璁剧疆** 鈫?**閰嶇疆鏂囦欢**
+3. 鍦?`server {}` 鍧楀唴杩藉姞涓€鏉?location 瑙勫垯锛?
 ```nginx
-# <项目名>
-location ^~ /projects/<项目名>/ {
-    proxy_pass https://hiwonder-docs.github.io/<仓库名>/projects/<项目名>/;
+# <椤圭洰鍚?
+location ^~ /projects/<椤圭洰鍚?/ {
+    proxy_pass https://hiwonder-docs.github.io/<浠撳簱鍚?/projects/<椤圭洰鍚?/;
     proxy_set_header Host hiwonder-docs.github.io;
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -225,8 +188,7 @@ location ^~ /projects/<项目名>/ {
 }
 ```
 
-以 LanderPi 为例：
-
+浠?LanderPi 涓轰緥锛?
 ```nginx
 # LanderPi
 location ^~ /projects/LanderPi/ {
@@ -239,172 +201,130 @@ location ^~ /projects/LanderPi/ {
 }
 ```
 
-4. **保存并重载 Nginx**
+4. **淇濆瓨骞堕噸杞?Nginx**
 
-> ⚠️ **常见错误**：`proxy_pass` 后面**不要加反引号**！直接写 URL，以分号 `;` 结尾。
-
+> 鈿狅笍 **甯歌閿欒**锛歚proxy_pass` 鍚庨潰**涓嶈鍔犲弽寮曞彿**锛佺洿鎺ュ啓 URL锛屼互鍒嗗彿 `;` 缁撳熬銆?
 ---
 
-### 第九步：验证访问
+### 绗節姝ワ細楠岃瘉璁块棶
 
-浏览器访问：
+娴忚鍣ㄨ闂細
 ```
-https://wiki-test.hiwonder.com/projects/<项目名>/en/latest/
+https://wiki-test.hiwonder.com/projects/<椤圭洰鍚?/en/latest/
 ```
 
-应自动跳转到文档首页。如果样式正常、图片显示正常，部署成功。
+搴旇嚜鍔ㄨ烦杞埌鏂囨。棣栭〉銆傚鏋滄牱寮忔甯搞€佸浘鐗囨樉绀烘甯革紝閮ㄧ讲鎴愬姛銆?
+---
+
+## 蹇€熸鏌ユ竻鍗?
+鎸夋娓呭崟閫愰」纭锛?
+- [ ] GitHub 宸插垱寤虹┖浠撳簱 `<浠撳簱鍚?`
+- [ ] 鏈湴浠撳簱宸插鍒舵ā鏉块」鐩?- [ ] `docs/docs/` 涓嬬殑 Markdown 鏂囦欢宸叉浛鎹负鏂伴」鐩唴瀹?- [ ] `docs/_static/` 涓嬬殑闈欐€佽祫婧愬凡鏇挎崲
+- [ ] `docs/.vitepress/config.mts` 鐨?`base` 宸叉敼涓?`/projects/<椤圭洰鍚?/en/latest/`
+- [ ] `docs/.vitepress/config.mts` 鐨?`title`銆乣description` 宸叉洿鏂?- [ ] `scripts/stage_main_site.mjs` 鐨?`targetDir` 宸叉敼涓?`projects/<椤圭洰鍚?/en/latest`
+- [ ] 鏍圭洰褰?`index.html` 閲嶅畾鍚戣矾寰勫凡鏇存柊
+- [ ] `docs/index.md` 鐨?`redirectTo` 宸叉洿鏂?- [ ] `docs/docs/index.md` 鐨?`redirectTo` 宸叉洿鏂?- [ ] `npm run docs:build` 鎵ц鎴愬姛
+- [ ] `npm run docs:stage-main` 鎵ц鎴愬姛
+- [ ] `projects/<椤圭洰鍚?/en/latest/` 鐩綍涓嬫湁 `docs/`銆乣assets/`銆乣index.html`
+- [ ] 鐢熸垚鐨?HTML 涓?CSS 璺緞涓?`/projects/<椤圭洰鍚?/en/latest/assets/xxx.css`
+- [ ] 宸叉彁浜ゅ苟鎺ㄩ€佸埌 GitHub
+- [ ] GitHub Pages Source 璁句负 `main` / `root`
+- [ ] GitHub Pages 鏈粦瀹氳嚜瀹氫箟鍩熷悕
+- [ ] GitHub Pages 鐩磋繛璁块棶姝ｅ父锛坄https://<鐢ㄦ埛鍚?.github.io/<浠撳簱鍚?/...`锛?- [ ] 瀹濆 Nginx 宸叉坊鍔?`location ^~ /projects/<椤圭洰鍚?/` 瑙勫垯
+- [ ] Nginx 瑙勫垯涓?`proxy_pass` 鏃犲弽寮曞彿
+- [ ] Nginx 瑙勫垯涓?`proxy_pass` 鐨?`<浠撳簱鍚?` 涓?git remote 涓€鑷达紙鎵ц `git remote -v` 纭锛岄€氬父甯?`-vite` 鍚庣紑锛?- [ ] Nginx 宸查噸杞?- [ ] `https://wiki-test.hiwonder.com/projects/<椤圭洰鍚?/en/latest/` 璁块棶姝ｅ父
 
 ---
 
-## 快速检查清单
+## 甯歌闂
 
-按此清单逐项确认：
+### Q1: 璁块棶鎶?502 Bad Gateway
 
-- [ ] GitHub 已创建空仓库 `<仓库名>`
-- [ ] 本地仓库已复制模板项目
-- [ ] `docs/docs/` 下的 Markdown 文件已替换为新项目内容
-- [ ] `docs/_static/` 下的静态资源已替换
-- [ ] `docs/.vitepress/config.mts` 的 `base` 已改为 `/projects/<项目名>/en/latest/`
-- [ ] `docs/.vitepress/config.mts` 的 `title`、`description` 已更新
-- [ ] `scripts/stage_main_site.mjs` 的 `targetDir` 已改为 `projects/<项目名>/en/latest`
-- [ ] 根目录 `index.html` 重定向路径已更新
-- [ ] `docs/index.md` 的 `redirectTo` 已更新
-- [ ] `docs/docs/index.md` 的 `redirectTo` 已更新
-- [ ] `npm run docs:build` 执行成功
-- [ ] `npm run docs:stage-main` 执行成功
-- [ ] `projects/<项目名>/en/latest/` 目录下有 `docs/`、`assets/`、`index.html`
-- [ ] 生成的 HTML 中 CSS 路径为 `/projects/<项目名>/en/latest/assets/xxx.css`
-- [ ] 已提交并推送到 GitHub
-- [ ] GitHub Pages Source 设为 `main` / `root`
-- [ ] GitHub Pages 未绑定自定义域名
-- [ ] GitHub Pages 直连访问正常（`https://<用户名>.github.io/<仓库名>/...`）
-- [ ] 宝塔 Nginx 已添加 `location ^~ /projects/<项目名>/` 规则
-- [ ] Nginx 规则中 `proxy_pass` 无反引号
-- [ ] Nginx 规则中 `proxy_pass` 的 `<仓库名>` 与 git remote 一致（执行 `git remote -v` 确认，通常带 `-vite` 后缀）
-- [ ] Nginx 已重载
-- [ ] `https://wiki-test.hiwonder.com/projects/<项目名>/en/latest/` 访问正常
+**鍘熷洜**锛歂ginx 閰嶇疆閿欒锛屽父瑙佹湁涓や釜鍧戯細
 
----
+1. **鍙嶅紩鍙烽棶棰?*锛氫粠鏂囨。澶嶅埗浠ｇ爜鏃讹紝`proxy_pass` URL 琚弽寮曞彿鍖呰９鈥斺€?*杩欐槸鏈€甯歌鍘熷洜**
+2. **浠撳簱鍚嶄笉鍖归厤**锛歚<浠撳簱鍚?`锛圙itHub 浠撳簱鍚嶏紝閫氬父甯?`-vite` 鍚庣紑锛変笌 `<椤圭洰鍚?`锛圲RL 璺敱锛屼笉甯﹀悗缂€锛夋贩娣?
+**妫€鏌?*锛?1. `proxy_pass` 鍚庨潰鏄惁鏈夊浣欑殑鍙嶅紩鍙凤紙\`锛?2. `proxy_pass` 鐨?URL 鏄惁姝ｇ‘锛歚https://hiwonder-docs.github.io/<浠撳簱鍚?/projects/<椤圭洰鍚?/`
+3. `<浠撳簱鍚?` 鏄惁涓?`git remote -v` 涓殑 origin 涓€鑷达紙閫氬父甯?`-vite` 鍚庣紑锛?4. 鐩存帴璁块棶 `https://<鐢ㄦ埛鍚?.github.io/<浠撳簱鍚?/projects/<椤圭洰鍚?/en/latest/` 楠岃瘉 GitHub Pages 鏄惁鍙闂?
+**姝ｇ‘鍐欐硶**锛?```nginx
+# 鉁?鏃犲弽寮曞彿 + 浠撳簱鍚嶅甫 -vite 鍚庣紑锛堝鏋滀粨搴撳悕鏈夊悗缂€锛?proxy_pass https://hiwonder-docs.github.io/<浠撳簱鍚?/projects/<椤圭洰鍚?/;
+```
 
-## 常见问题
-
-### Q1: 访问报 502 Bad Gateway
-
-**原因**：Nginx 配置错误，常见有两个坑：
-
-1. **反引号问题**：从文档复制代码时，`proxy_pass` URL 被反引号包裹——**这是最常见原因**
-2. **仓库名不匹配**：`<仓库名>`（GitHub 仓库名，通常带 `-vite` 后缀）与 `<项目名>`（URL 路由，不带后缀）混淆
-
-**检查**：
-1. `proxy_pass` 后面是否有多余的反引号（\`）
-2. `proxy_pass` 的 URL 是否正确：`https://hiwonder-docs.github.io/<仓库名>/projects/<项目名>/`
-3. `<仓库名>` 是否与 `git remote -v` 中的 origin 一致（通常带 `-vite` 后缀）
-4. 直接访问 `https://<用户名>.github.io/<仓库名>/projects/<项目名>/en/latest/` 验证 GitHub Pages 是否可访问
-
-**正确写法**：
+**閿欒鍐欐硶**锛堜細 502锛夛細
 ```nginx
-# ✅ 无反引号 + 仓库名带 -vite 后缀（如果仓库名有后缀）
-proxy_pass https://hiwonder-docs.github.io/<仓库名>/projects/<项目名>/;
+# 鉂?鏈夊弽寮曞彿
+proxy_pass `https://hiwonder-docs.github.io/<浠撳簱鍚?/projects/<椤圭洰鍚?/;`
+
+# 鉂?浠撳簱鍚嶇己 -vite 鍚庣紑锛堝亣璁句粨搴撳悕鏄?xxx-vite锛?proxy_pass https://hiwonder-docs.github.io/<椤圭洰鍚?/projects/<椤圭洰鍚?/;
 ```
 
-**错误写法**（会 502）：
-```nginx
-# ❌ 有反引号
-proxy_pass `https://hiwonder-docs.github.io/<仓库名>/projects/<项目名>/;`
+**璁板繂鍙ｈ瘈**锛氶」鐩悕涓嶅甫 `-vite`锛屼粨搴撳悕甯?`-vite`锛孨ginx 鐨?`proxy_pass` 閲屼袱涓悕瀛椾笉瑕佹悶鍙嶃€?
+### Q2: 椤甸潰鑳芥墦寮€浣?CSS 涓㈠け
 
-# ❌ 仓库名缺 -vite 后缀（假设仓库名是 xxx-vite）
-proxy_pass https://hiwonder-docs.github.io/<项目名>/projects/<项目名>/;
+**鍘熷洜**锛歚base` 閰嶇疆閿欒锛屾垨鏋勫缓浜х墿鏈帹閫佸埌 GitHub銆?
+**妫€鏌?*锛?1. 鎵撳紑 `projects/<椤圭洰鍚?/en/latest/index.html`锛岀湅 CSS 璺緞鏄惁涓?`/projects/<椤圭洰鍚?/en/latest/assets/xxx.css`
+2. 纭 `config.mts` 鐨?`base` 涓?`/projects/<椤圭洰鍚?/en/latest/`
+3. 纭 `projects/` 鐩綍宸叉彁浜ゅ埌 GitHub
+4. 娴忚鍣?F12 鈫?Network 鈫?鐪?CSS 璇锋眰杩斿洖浠€涔堢姸鎬?
+### Q3: 璁块棶鎶?500 鏈嶅姟鍣ㄥ紓甯?
+**鍘熷洜**锛氳姹傝 PHP 鎷︽埅銆?
+**瑙ｅ喅**锛歭ocation 鍓嶇紑鍔?`^~`锛?```nginx
+location ^~ /projects/<椤圭洰鍚?/ {
 ```
 
-**记忆口诀**：项目名不带 `-vite`，仓库名带 `-vite`，Nginx 的 `proxy_pass` 里两个名字不要搞反。
+### Q4: 璁块棶鎶ュ煙鍚嶅凡鍗犵敤
 
-### Q2: 页面能打开但 CSS 丢失
-
-**原因**：`base` 配置错误，或构建产物未推送到 GitHub。
-
-**检查**：
-1. 打开 `projects/<项目名>/en/latest/index.html`，看 CSS 路径是否为 `/projects/<项目名>/en/latest/assets/xxx.css`
-2. 确认 `config.mts` 的 `base` 为 `/projects/<项目名>/en/latest/`
-3. 确认 `projects/` 目录已提交到 GitHub
-4. 浏览器 F12 → Network → 看 CSS 请求返回什么状态
-
-### Q3: 访问报 500 服务器异常
-
-**原因**：请求被 PHP 拦截。
-
-**解决**：location 前缀加 `^~`：
-```nginx
-location ^~ /projects/<项目名>/ {
-```
-
-### Q4: 访问报域名已占用
-
-**原因**：另一个 GitHub 仓库还绑着 `wiki-test.hiwonder.com`。
-
-**解决**：在该仓库 Settings → Pages → Custom domain → Remove。
-
-### Q5: 构建产物路径不对（生成了 `projects/` 而不是 `projects/<项目名>/en/latest/`）
-
-**原因**：`stage_main_site.mjs` 的 `targetDir` 未更新。
-
-**解决**：确认第 10 行为：
-```javascript
-const targetDir = join(repositoryRoot, 'projects/<项目名>/en/latest')
+**鍘熷洜**锛氬彟涓€涓?GitHub 浠撳簱杩樼粦鐫€ `wiki-test.hiwonder.com`銆?
+**瑙ｅ喅**锛氬湪璇ヤ粨搴?Settings 鈫?Pages 鈫?Custom domain 鈫?Remove銆?
+### Q5: 鏋勫缓浜х墿璺緞涓嶅锛堢敓鎴愪簡 `projects/` 鑰屼笉鏄?`projects/<椤圭洰鍚?/en/latest/`锛?
+**鍘熷洜**锛歚stage_main_site.mjs` 鐨?`targetDir` 鏈洿鏂般€?
+**瑙ｅ喅**锛氱‘璁ょ 10 琛屼负锛?```javascript
+const targetDir = join(repositoryRoot, 'projects/<椤圭洰鍚?/en/latest')
 ```
 
 ---
 
-## 文件结构参考
-
-完整的项目目录结构如下：
+## 鏂囦欢缁撴瀯鍙傝€?
+瀹屾暣鐨勯」鐩洰褰曠粨鏋勫涓嬶細
 
 ```
-<仓库名>/
-├── docs/
-│   ├── .vitepress/
-│   │   ├── config.mts              ← VitePress 配置（改 base）
-│   │   └── autoSidebar.mts         ← 侧边栏自动生成（一般不用改）
-│   ├── docs/                       ← Markdown 文档（替换内容）
-│   │   ├── 1_xxx.md
-│   │   ├── 2_xxx.md
-│   │   └── index.md
-│   ├── _static/                    ← 静态资源（替换内容）
-│   │   └── media/
-│   ├── public/
-│   │   ├── favicon.ico
-│   │   └── e-logo.png
-│   └── index.md                    ← 首页重定向（改 redirectTo）
-├── scripts/
-│   └── stage_main_site.mjs         ← 构建脚本（改 targetDir）
-├── projects/                       ← 构建产物（自动生成，需提交）
-│   └── <项目名>/
-│       └── en/
-│           └── latest/
-│               ├── assets/
-│               ├── docs/
-│               │   └── *.html
-│               ├── index.html
-│               ├── 404.html
-│               ├── favicon.ico
-│               └── ...
-├── .nojekyll                       ← 空文件，防止 GitHub Pages 忽略 _ 开头文件
-├── .gitignore
-├── index.html                      ← 根目录重定向（改 URL）
-├── package.json
-├── package-lock.json
-└── README.md
+<浠撳簱鍚?/
+鈹溾攢鈹€ docs/
+鈹?  鈹溾攢鈹€ .vitepress/
+鈹?  鈹?  鈹溾攢鈹€ config.mts              鈫?VitePress 閰嶇疆锛堟敼 base锛?鈹?  鈹?  鈹斺攢鈹€ autoSidebar.mts         鈫?渚ц竟鏍忚嚜鍔ㄧ敓鎴愶紙涓€鑸笉鐢ㄦ敼锛?鈹?  鈹溾攢鈹€ docs/                       鈫?Markdown 鏂囨。锛堟浛鎹㈠唴瀹癸級
+鈹?  鈹?  鈹溾攢鈹€ 1_xxx.md
+鈹?  鈹?  鈹溾攢鈹€ 2_xxx.md
+鈹?  鈹?  鈹斺攢鈹€ index.md
+鈹?  鈹溾攢鈹€ _static/                    鈫?闈欐€佽祫婧愶紙鏇挎崲鍐呭锛?鈹?  鈹?  鈹斺攢鈹€ media/
+鈹?  鈹溾攢鈹€ public/
+鈹?  鈹?  鈹溾攢鈹€ favicon.ico
+鈹?  鈹?  鈹斺攢鈹€ e-logo.png
+鈹?  鈹斺攢鈹€ index.md                    鈫?棣栭〉閲嶅畾鍚戯紙鏀?redirectTo锛?鈹溾攢鈹€ scripts/
+鈹?  鈹斺攢鈹€ stage_main_site.mjs         鈫?鏋勫缓鑴氭湰锛堟敼 targetDir锛?鈹溾攢鈹€ projects/                       鈫?鏋勫缓浜х墿锛堣嚜鍔ㄧ敓鎴愶紝闇€鎻愪氦锛?鈹?  鈹斺攢鈹€ <椤圭洰鍚?/
+鈹?      鈹斺攢鈹€ en/
+鈹?          鈹斺攢鈹€ latest/
+鈹?              鈹溾攢鈹€ assets/
+鈹?              鈹溾攢鈹€ docs/
+鈹?              鈹?  鈹斺攢鈹€ *.html
+鈹?              鈹溾攢鈹€ index.html
+鈹?              鈹溾攢鈹€ 404.html
+鈹?              鈹溾攢鈹€ favicon.ico
+鈹?              鈹斺攢鈹€ ...
+鈹溾攢鈹€ .nojekyll                       鈫?绌烘枃浠讹紝闃叉 GitHub Pages 蹇界暐 _ 寮€澶存枃浠?鈹溾攢鈹€ .gitignore
+鈹溾攢鈹€ index.html                      鈫?鏍圭洰褰曢噸瀹氬悜锛堟敼 URL锛?鈹溾攢鈹€ package.json
+鈹溾攢鈹€ package-lock.json
+鈹斺攢鈹€ README.md
 ```
 
 ---
 
-## 关键配置项速查表
-
-| 文件 | 配置项 | 值 |
+## 鍏抽敭閰嶇疆椤归€熸煡琛?
+| 鏂囦欢 | 閰嶇疆椤?| 鍊?|
 |------|--------|-----|
-| `docs/.vitepress/config.mts` | `base` | `/projects/<项目名>/en/latest/` |
-| `scripts/stage_main_site.mjs` | `targetDir` | `projects/<项目名>/en/latest` |
-| 根目录 `index.html` | `meta refresh` | `/projects/<项目名>/en/latest/docs/<入口>.html` |
-| `docs/index.md` | `redirectTo` | `/docs/<入口>.html` |
-| `docs/docs/index.md` | `redirectTo` | `/docs/<入口>.html` |
-| Nginx `location` | 匹配路径 | `^~ /projects/<项目名>/` |
-| Nginx `proxy_pass` | 上游地址 | `https://hiwonder-docs.github.io/<仓库名>/projects/<项目名>/` |
+| `docs/.vitepress/config.mts` | `base` | `/projects/<椤圭洰鍚?/en/latest/` |
+| `scripts/stage_main_site.mjs` | `targetDir` | `projects/<椤圭洰鍚?/en/latest` |
+| 鏍圭洰褰?`index.html` | `meta refresh` | `/projects/<椤圭洰鍚?/en/latest/docs/<鍏ュ彛>.html` |
+| `docs/index.md` | `redirectTo` | `/docs/<鍏ュ彛>.html` |
+| `docs/docs/index.md` | `redirectTo` | `/docs/<鍏ュ彛>.html` |
+| Nginx `location` | 鍖归厤璺緞 | `^~ /projects/<椤圭洰鍚?/` |
+| Nginx `proxy_pass` | 涓婃父鍦板潃 | `https://hiwonder-docs.github.io/<浠撳簱鍚?/projects/<椤圭洰鍚?/` |

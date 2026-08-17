@@ -1,4 +1,4 @@
-# LeRobot Documentation
+﻿# LeRobot Documentation
 
 This repository contains the LeRobot VitePress documentation site. The
 documentation source files are Markdown files under `docs/page/`.
